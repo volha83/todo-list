@@ -1,7 +1,15 @@
 import React from 'react';
 import TodoListItem from './TodoListItem';
 
-function TodoList({ todos, onCompleteTodo, onUpdateTodo }) {
+function TodoList({ todos, onCompleteTodo, onUpdateTodo, isLoading }) {
+  if (isLoading) {
+    return <p>Todo loading...</p>;
+  }
+
+  if (todos.length === 0) {
+    return <p>No todos yet!</p>;
+  }
+
   const filteredTodoList = todos.filter((todo) => !todo.isCompleted);
   return (
     <>
