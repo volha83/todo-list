@@ -8,8 +8,7 @@ function TodoForm({ onAddTodo, isSaving }) {
 
   function handleAddTodo(event) {
     event.preventDefault();
-    // console.dir(todoTitleInput.current.title);
-    // const title = todoTitleInput.current.value;
+
     onAddTodo(workingTodoTitle);
     setWorkingTodoTitle('');
     todoTitleInput.current.value = '';
