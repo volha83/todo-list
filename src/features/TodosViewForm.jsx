@@ -1,4 +1,37 @@
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+
+const StyledForm = styled.form`
+  display: flex;
+  gap: 1em;
+  padding: 0.5em;
+`;
+
+const StyledSelect = styled.select`
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+`;
+
+const StyledInput = styled.input`
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+`;
+
+const StyledButton = styled.button`
+  margin-left: 0.5em;
+  padding: 0.4em;
+  border: none;
+  border-radius: 0.4em;
+  background: #f44336;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    background: #d32f2f;
+  }
+`;
 
 function TodosViewForm({
   sortField,
@@ -16,7 +49,7 @@ function TodosViewForm({
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      console.log('send to App:', localQueryString);
+      //   console.log('send to App:', localQueryString);
       setQueryString(localQueryString);
     }, 500);
 
@@ -28,47 +61,47 @@ function TodosViewForm({
   }, [queryString]);
 
   return (
-    <form onSubmit={preventRefresh}>
+    <StyledForm onSubmit={preventRefresh}>
       <div>
         <label>
           Search todos:
-          <input
+          <StyledInput
             type="text"
             value={localQueryString}
             onChange={(e) => setLocalQueryString(e.target.value)}
           />
-          <button type="button" onClick={() => setLocalQueryString('')}>
+          <StyledButton type="button" onClick={() => setLocalQueryString('')}>
             Clear
-          </button>
+          </StyledButton>
         </label>
       </div>
 
       <div>
         <label>
           Sort by
-          <select
+          <StyledSelect
             name="sortField"
             value={sortField}
             onChange={(e) => setSortField(e.target.value)}
           >
             <option value="title">Title</option>
             <option value="createdTime">Time added</option>
-          </select>
+          </StyledSelect>
         </label>
 
         <label>
           Direction
-          <select
+          <StyledSelect
             name="sortDirection"
             value={sortDirection}
             onChange={(e) => setSortDirection(e.target.value)}
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
-          </select>
+          </StyledSelect>
         </label>
       </div>
-    </form>
+    </StyledForm>
   );
 }
 export default TodosViewForm;

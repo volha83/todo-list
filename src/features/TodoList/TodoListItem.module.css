@@ -1,0 +1,9 @@
+.todoItem {
+  padding-bottom: 8px;
+  border-bottom: 1px colid #ddd;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}

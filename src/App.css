@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: azure;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  color: darkblue;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  padding: 4em;
+}
+
+button {
+  background-color: cadetblue;
+  color: white;
+  border-radius: 0.8em;
+  border: 2px solid rgb(36, 154, 158);
+  padding: 0.6em;
+  margin: 0.3em;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(132, 187, 188);
+  border: 2px solid rgb(31, 127, 131);
+}
+
+/* input[type='text'] { */
+input {
+  padding: 0.8em;
+  border: 1px solid #dbf2f5;
+  border-radius: 0.5em;
+}
+
+select {
+  padding: 0.5em;
+  border: 1px solid #a7cbd0;
+  border-radius: 0.5em;
+}
+
+label {
+  padding: 0.5em;
+}
+
+/* .errorMessage {
+  border: 2px solid red;
+  color: darkred;
+} */

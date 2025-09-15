@@ -1,0 +1,19 @@
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* min-height: 100vh; */
+  background-color: #f5f5f5;
+  padding: 1em;
+  margin: 2em;
+}
+
+.errorMessage {
+  border: 1px solid red;
+  padding: 1em;
+  background-color: #f9c7c7;
+  color: darkred;
+  border-radius: 4px;
+  margin: 10px 0;
+}

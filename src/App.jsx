@@ -3,6 +3,7 @@ import TodoList from './features/TodoList/TodoList';
 import TodoForm from './features/TodoForm';
 import TodosViewForm from './features/TodosViewForm';
 import { useState, useEffect, useCallback } from 'react';
+import styles from './App.module.css';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -185,7 +186,7 @@ function App() {
   // //////////
 
   return (
-    <div>
+    <div className={styles.appContainer}>
       <h1>Todo List</h1>
 
       {isLoading && <p>loading...</p>}
@@ -213,7 +214,7 @@ function App() {
 
       {/* display error */}
       {errorMessage && (
-        <div>
+        <div className={styles.errorMessage}>
           <hr />
           <p>{errorMessage}</p>
           <button onClick={() => setErrorMessage('')}>
