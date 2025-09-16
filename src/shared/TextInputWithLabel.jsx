@@ -1,10 +1,24 @@
 import React from 'react';
+import styled from 'styled-components';
 
-function TextInputWithLabel({ elementId, label, onChange, value, ref }) {
+const StyledLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0.5em;
+`;
+
+const StyledInput = styled.input`
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+`;
+
+function TextInputWithLabel({ elementId, labelText, onChange, value, ref }) {
   return (
     <>
-      <label htmlFor={elementId}>{label}</label>
-      <input
+      <StyledLabel htmlFor={elementId}>{labelText}</StyledLabel>
+      <StyledInput
         type="text"
         id={elementId}
         ref={ref}

@@ -1,0 +1,9 @@
+.todoItem {
+  padding-bottom: 0.1em;
+  /* border-bottom: 1px solid #ddd;   divided all list */
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
