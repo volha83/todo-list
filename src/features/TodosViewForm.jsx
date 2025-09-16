@@ -21,10 +21,10 @@ const StyledInput = styled.input`
 
 const StyledButton = styled.button`
   margin-left: 0.5em;
-  padding: 0.4em;
-  border: none;
-  border-radius: 0.4em;
+  padding: 0.5em;
+  border-radius: 0.5em;
   background: #f44336;
+  border: 1px solid #a7cbd0;
   color: white;
   cursor: pointer;
 

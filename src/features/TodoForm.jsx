@@ -6,14 +6,14 @@ import styled from 'styled-components';
 const StyledForm = styled.form`
   display: flex;
   gap: 1em;
-  padding: 1em;
+  padding: 0.5em;
 `;
 
 const StyledButton = styled.button`
-  padding: 0.6em 1.4em;
+  padding: 0.5em;
   background: #4caf50
   color: white;
-  border: none;
+  ${'' /* border: none; */}
   border-radius: 0.5em;
   cursor: pointer;
 

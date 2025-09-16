@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import TextInputWithLabel from '../../shared/TextInputWithLabel';
 import styles from './TodoListItem.module.css';
+import checkIcon from '../../icons/check-solid-full.svg';
+// import circleIcon from '../../icons/circle-regular-full.svg';
 
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -44,14 +46,29 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
           </>
         ) : (
           <>
-            <label>
-              <input
+            {/* <input
                 type="checkbox"
                 id={`checkbox${todo.id}`}
                 checked={todo.isCompleted}
                 onChange={() => onCompleteTodo(todo.id)}
+              /> */}
+            <button
+              type="button"
+              onClick={() => onCompleteTodo(todo.id)}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              <img
+                // src={todo.isCompleted ? checkIcon : checkIcon}
+                src={checkIcon}
+                width="20"
+                height="20"
               />
-            </label>
+            </button>
+
             <span onClick={() => setIsEditing(true)}>{todo.title}</span>
           </>
         )}

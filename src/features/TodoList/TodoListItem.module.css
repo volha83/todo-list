@@ -1,6 +1,6 @@
 .todoItem {
-  padding-bottom: 8px;
-  border-bottom: 1px colid #ddd;
+  padding-bottom: 0.1em;
+  /* border-bottom: 1px solid #ddd;   divided all list */
 }
 
 .completed {

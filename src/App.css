@@ -20,8 +20,8 @@ button {
   background-color: cadetblue;
   color: white;
   border-radius: 0.8em;
-  border: 2px solid rgb(36, 154, 158);
-  padding: 0.6em;
+  border: 1px solid rgb(36, 154, 158);
+  padding: 0.5em;
   margin: 0.3em;
   font-size: 1.1em;
   cursor: pointer;
@@ -29,7 +29,7 @@ button {
 
 button:hover {
   background-color: rgb(132, 187, 188);
-  border: 2px solid rgb(31, 127, 131);
+  border: 1px solid rgb(31, 127, 131);
 }
 
 /* input[type='text'] { */
@@ -53,3 +53,7 @@ label {
   border: 2px solid red;
   color: darkred;
 } */
+
+.header {
+  background-color: red;
+}
