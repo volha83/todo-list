@@ -3,6 +3,10 @@ import TodoList from './features/TodoList/TodoList';
 import TodoForm from './features/TodoForm';
 import TodosViewForm from './features/TodosViewForm';
 import { useState, useEffect, useCallback } from 'react';
+import styles from './App.module.css';
+import logo from './to-do-list.png';
+// import errorIcon from '../../icons/traingle-exclamation-solid-full.svg';
+// import circleIcon from '../../icons/circle-regular-full.svg';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -185,8 +189,15 @@ function App() {
   // //////////
 
   return (
-    <div>
-      <h1>Todo List</h1>
+    <div className={styles.appContainer}>
+      <header>
+        <img
+          src={logo}
+          alt="Todo Logo"
+          style={{ height: '5em', marginRight: '1em' }}
+        />
+        <h1>Todo List</h1>
+      </header>
 
       {isLoading && <p>loading...</p>}
       {isSaving && <p>Saving...</p>}
@@ -213,8 +224,18 @@ function App() {
 
       {/* display error */}
       {errorMessage && (
-        <div>
+        <div className={styles.errorMessage}>
           <hr />
+
+          <img
+            src="/src/icons/triangle-exclamation-solid-full.svg"
+            alt="Error icon"
+            style={{
+              width: '5em',
+              height: '5em',
+            }}
+          />
+
           <p>{errorMessage}</p>
           <button onClick={() => setErrorMessage('')}>
             Dismiss Error Message
