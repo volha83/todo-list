@@ -12,6 +12,10 @@ const actions = {
 
   revertTodo: 'revertTodo',
   clearError: 'clearError',
+
+  setSortField: 'setSortField',
+  setSortDirection: 'setSortDirection',
+  setQueryString: 'setQueryString',
 };
 
 const initialState = {
@@ -111,6 +115,23 @@ function reducer(state = initialState, action) {
         ...state,
         errorMessage: '',
       };
+
+    case actions.setSortField:
+      return {
+        ...state,
+        sortField: action.sortField,
+      };
+    case actions.setSortDirection:
+      return {
+        ...state,
+        sortDirection: action.sortDirection,
+      };
+    case actions.setQueryString:
+      return {
+        ...state,
+        queryString: action.queryString,
+      };
+
     default:
       return state;
   }

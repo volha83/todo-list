@@ -5,8 +5,7 @@ import TodosViewForm from './features/TodosViewForm';
 import { useEffect, useCallback, useReducer } from 'react';
 import styles from './App.module.css';
 import logo from './to-do-list.png';
-// import errorIcon from '../../icons/traingle-exclamation-solid-full.svg';
-// import circleIcon from '../../icons/circle-regular-full.svg';
+
 import {
   reducer as todosReducer,
   actions as todoActions,
@@ -14,14 +13,6 @@ import {
 } from './reducers/todos.reducer';
 
 function App() {
-  // const [todoList, setTodoList] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState('');
-  // const [isSaving, setIsSaving] = useState(false);
-  // const [sortField, setSortField] = useState('createdTime');
-  // const [sortDirection, setSortDirection] = useState('desc');
-  // const [queryString, setQueryString] = useState('');
-
   const [todoState, dispatch] = useReducer(todosReducer, initialTodosState);
 
   const {
@@ -70,19 +61,9 @@ function App() {
         }
 
         const data = await resp.json();
-        // const todos = data.records.map((record) => ({
-        //   id: record.id,
-        //   title: record.fields.title,
-        //   isCompleted: record.fields.isCompleted,
-        // }));
         dispatch({ type: todoActions.loadTodos, records: data.records });
-        //       setTodoList(todos);
-        //       setErrorMessage('');
       } catch (error) {
         dispatch({ type: todoActions.setLoadError, error });
-        //       setErrorMessage(`Error: ${error.message}.. Reverting todo...`);
-        //     } finally {
-        //       setIsLoading(false);
       }
     };
     fetchTodos();
@@ -120,36 +101,17 @@ function App() {
         throw new Error(resp.status);
       }
       const { records } = await resp.json();
-      // const savedTodo = {
-      //   id: records[0].id,
-      //   title: records[0].fields.title,
-      //   isCompleted: records[0].fields.isCompleted,
-      // };
-      //     setTodoList([...todoList, savedTodo]);
-      //     setErrorMessage('');
+
       dispatch({ type: todoActions.addTodo, record: records[0] });
     } catch (error) {
-      //     console.log(error.message);
-      //     setErrorMessage(`Error: ${error.message}.. Reverting todo...`);
       dispatch({ type: todoActions.setLoadError, error });
     } finally {
-      //     setIsSaving(false);
       dispatch({ type: todoActions.endRequest });
     }
   };
 
   // ********** complete todo **************
   function completeTodo(id) {
-    // const updatedTodos = todoList.map((todo) => {
-    //   if (todo.id === id) {
-    //     return {
-    //       ...todo,
-    //       isCompleted: !todo.isCompleted,
-    //     };
-    //   }
-    //   return todo;
-    // });
-    // setTodoList(updatedTodos);
     dispatch({ type: todoActions.completeTodo, id });
   }
 
@@ -221,16 +183,16 @@ function App() {
       <hr />
       <TodosViewForm
         sortField={sortField}
-        setSortField={(field) =>
-          dispatch({ type: todoActions.setSortField, field })
+        sortFieldChange={(field) =>
+          dispatch({ type: todoActions.setSortField, sortField: field })
         }
         sortDirection={sortDirection}
-        setSortDirection={(dir) =>
-          dispatch({ type: todoActions.setSortDirection, dir })
+        sortDirectionChange={(dir) =>
+          dispatch({ type: todoActions.setSortDirection, sortDirection: dir })
         }
         queryString={queryString}
-        setQueryString={(query) =>
-          dispatch({ type: todoActions.setQueryString, query })
+        queryStringChange={(query) =>
+          dispatch({ type: todoActions.setQueryString, queryString: query })
         }
       />
 
