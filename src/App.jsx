@@ -111,15 +111,58 @@ function App() {
   };
 
   // ********** complete todo **************
-  function completeTodo(id) {
-    dispatch({ type: todoActions.completeTodo, id });
-  }
+  const completeTodo = async (id) => {
+    const originalTodo = todoList.find((todo) => todo.id === id);
+
+    if (!originalTodo) return;
+    const completedTodo = { ...originalTodo, isCompleted: true };
+
+    //***** update UI
+    dispatch({ type: todoActions.updateTodo, editedTodo: completedTodo });
+
+    // **** prepare the payload for the Airtable
+    const payload = {
+      records: [
+        {
+          id: completedTodo.id,
+          fields: {
+            title: completedTodo.title,
+            isCompleted: true,
+          },
+        },
+      ],
+    };
+
+    const options = {
+      method: 'PATCH',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+    try {
+      dispatch({ type: todoActions.startRequest });
+      const resp = await fetch(url, options);
+
+      if (!resp.ok) {
+        throw new Error(resp.status);
+      }
+      await resp.json();
+      dispatch({ type: todoActions.endRequest });
+    } catch (error) {
+      dispatch({ type: todoActions.setLoadError, error });
+      dispatch({ type: todoActions.revertTodo, editedTodo: originalTodo });
+    }
+  };
 
   //********** updateTodo *********
   const updateTodo = async (editedTodo) => {
     const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
+
     dispatch({ type: todoActions.updateTodo, editedTodo });
 
+    // **** prepare the payload for the Airtable
     const payload = {
       records: [
         {
