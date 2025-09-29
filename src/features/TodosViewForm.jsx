@@ -35,11 +35,14 @@ const StyledButton = styled.button`
 
 function TodosViewForm({
   sortField,
-  setSortField,
+  sortFieldChange,
+  //   setSortField,
   sortDirection,
-  setSortDirection,
+  sortDirectionChange,
+  //   setSortDirection,
   queryString,
-  setQueryString,
+  queryStringChange,
+  //   setQueryString,
 }) {
   const [localQueryString, setLocalQueryString] = useState(queryString);
 
@@ -50,11 +53,11 @@ function TodosViewForm({
   useEffect(() => {
     const debounce = setTimeout(() => {
       //   console.log('send to App:', localQueryString);
-      setQueryString(localQueryString);
+      queryStringChange(localQueryString);
     }, 500);
 
     return () => clearTimeout(debounce);
-  }, [localQueryString, setQueryString]);
+  }, [localQueryString, queryStringChange]);
 
   useEffect(() => {
     setLocalQueryString(queryString);
@@ -82,7 +85,7 @@ function TodosViewForm({
           <StyledSelect
             name="sortField"
             value={sortField}
-            onChange={(e) => setSortField(e.target.value)}
+            onChange={(e) => sortFieldChange(e.target.value)}
           >
             <option value="title">Title</option>
             <option value="createdTime">Time added</option>
@@ -94,7 +97,7 @@ function TodosViewForm({
           <StyledSelect
             name="sortDirection"
             value={sortDirection}
-            onChange={(e) => setSortDirection(e.target.value)}
+            onChange={(e) => sortDirectionChange(e.target.value)}
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
