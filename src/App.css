@@ -48,12 +48,3 @@ select {
 label {
   padding: 0.5em;
 }
-
-/* .errorMessage {
-  border: 2px solid red;
-  color: darkred;
-} */
-
-.header {
-  background-color: red;
-}
