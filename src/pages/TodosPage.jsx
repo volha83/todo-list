@@ -22,7 +22,7 @@ function TodosPage({
       {isLoading && <p>loading...</p>}
       {isSaving && <p>Saving...</p>}
 
-      <TodoForm onAddTodo={addTodo} />
+      <TodoForm addTodo={addTodo} />
 
       <TodoList
         onCompleteTodo={completeTodo}

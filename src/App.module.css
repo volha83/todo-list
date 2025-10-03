@@ -1,15 +1,16 @@
 .appContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: #f5f5f5;
   padding: 0.5em;
   margin: 2em;
   background-image: url('/background1.jpg');
   background-size: cover;
   background-position: center;
+  border-radius: 0.5em;
 }
 
 .errorMessage {
@@ -24,10 +25,4 @@
   color: darkred;
   border-radius: 0.5em;
   margin: 1em;
-}
-
-.headlogo {
-  display: flex;
-  flex-direction: row;
-  background-color: red;
 }

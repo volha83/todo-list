@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  justify-content: space-between; /* title on the left, menu on the right */
+  justify-content: space-between;
   align-items: center;
   padding: 1rem;
   border-bottom: 1px solid #ccc;
@@ -27,4 +27,9 @@
 .inactive {
   color: black;
   text-decoration: none;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
 }

@@ -48,3 +48,8 @@ select {
 label {
   padding: 0.5em;
 }
+
+#root {
+  display: flex;
+  flex-direction: column;
+}

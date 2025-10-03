@@ -3,7 +3,7 @@ import './App.css';
 // import TodoForm from './features/TodoForm';
 // import TodosViewForm from './features/TodosViewForm';
 import { useEffect, useCallback, useReducer, useState } from 'react';
-import styles from './App.module.css';
+// import styles from './App.module.css';
 import logo from './to-do-list.png';
 
 import {
@@ -232,12 +232,11 @@ function App() {
         <h1>Todo List</h1>
       </header> */}
 
-      <Header className={styles.header} title={title} />
-      <img
-        src={logo}
-        alt="Todo Logo"
-        style={{ height: '5em', marginRight: '1em' }}
-      />
+      <img src={logo} alt="Todo Logo" style={{ height: '5em', width: '5em' }} />
+
+      {/* <Header className={styles.header} title={title} /> */}
+      <Header title={title} />
+
       <Routes>
         <Route
           path="/"
@@ -258,9 +257,8 @@ function App() {
             />
           }
         />
-        {/* <Route path='/' element={<TodosPage ... />} /> */}
-        <Route path="/about" element={<h1>About</h1>} />
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
