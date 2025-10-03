@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledForm = styled.form`
   display: flex;
-  gap: 1em;
+  gap: 0.5em;
   padding: 0.5em;
 `;
 
