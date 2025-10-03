@@ -2,6 +2,7 @@ import TodoForm from '../features/TodoForm';
 import TodoList from '../features/TodoList/TodoList';
 import TodosViewForm from '../features/TodosViewForm';
 import styles from '../App.module.css';
+import { useSearchParams } from 'react-router';
 
 function TodosPage({
   todoList,
@@ -17,6 +18,22 @@ function TodosPage({
   dispatch,
   todoActions,
 }) {
+  /****** pagination *******/
+  const [searchParams, setSearchParams] = useSearchParams();
+  const itemsPerPage = 15;
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
+
+  const indexOfFirstTodo = (currentPage - 1) * itemsPerPage;
+  const indexOfLastTodo = indexOfFirstTodo + itemsPerPage;
+
+  const todosForCurrentPage = todoList.slice(indexOfFirstTodo, indexOfLastTodo);
+  const totalPages = Math.ceil(todoList.length / itemsPerPage);
+
+  //function change of pages
+  const goToPage = (page) => {
+    setSearchParams({ page: page.toString() });
+  };
+
   return (
     <div className={styles.appContainer}>
       {isLoading && <p>loading...</p>}
@@ -26,11 +43,31 @@ function TodosPage({
 
       <TodoList
         onCompleteTodo={completeTodo}
-        todos={todoList}
+        // todos={todoList}
+        todos={todosForCurrentPage}
         onUpdateTodo={updateTodo}
         isLoading={isLoading}
         isSaving={isSaving}
       />
+
+      {/* buttons pagination  */}
+      <div style={{ marginTop: '1em' }}>
+        <button
+          disabled={currentPage === 1}
+          onClick={() => goToPage(currentPage - 1)}
+        >
+          Prev
+        </button>
+        <span style={{ margin: '1em' }}>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          disabled={currentPage === totalPages}
+          onClick={() => goToPage(currentPage + 1)}
+        >
+          Next
+        </button>
+      </div>
 
       <hr />
       <TodosViewForm
