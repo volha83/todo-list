@@ -2,7 +2,8 @@ import TodoForm from '../features/TodoForm';
 import TodoList from '../features/TodoList/TodoList';
 import TodosViewForm from '../features/TodosViewForm';
 import styles from '../App.module.css';
-import { useSearchParams } from 'react-router';
+import { useSearchParams, useNavigate } from 'react-router';
+import { useEffect } from 'react';
 
 function TodosPage({
   todoList,
@@ -20,6 +21,8 @@ function TodosPage({
 }) {
   /****** pagination *******/
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
   const itemsPerPage = 15;
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
 
@@ -29,17 +32,36 @@ function TodosPage({
   const todosForCurrentPage = todoList.slice(indexOfFirstTodo, indexOfLastTodo);
   const totalPages = Math.ceil(todoList.length / itemsPerPage);
 
-  //function change of pages
-  const goToPage = (page) => {
-    setSearchParams({ page: page.toString() });
+  //** handlers **/
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setSearchParams({ page: (currentPage - 1).toString() });
+    }
   };
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setSearchParams({ page: (currentPage + 1).toString() });
+    }
+  };
+
+  useEffect(() => {
+    if (totalPages > 0) {
+      if (isNaN(currentPage) || currentPage < 1 || currentPage > totalPages) {
+        navigate('/');
+      }
+    }
+  }, [currentPage, totalPages, navigate]);
+
+  //   const goToPage = (page) => {
+  //     setSearchParams({ page: page.toString() });
+  //   };
 
   return (
     <div className={styles.appContainer}>
       {isLoading && <p>loading...</p>}
       {isSaving && <p>Saving...</p>}
 
-      <TodoForm addTodo={addTodo} />
+      <TodoForm onAddTodo={addTodo} />
 
       <TodoList
         onCompleteTodo={completeTodo}
@@ -52,19 +74,13 @@ function TodosPage({
 
       {/* buttons pagination  */}
       <div style={{ marginTop: '1em' }}>
-        <button
-          disabled={currentPage === 1}
-          onClick={() => goToPage(currentPage - 1)}
-        >
-          Prev
+        <button disabled={currentPage === 1} onClick={handlePreviousPage}>
+          Previous
         </button>
         <span style={{ margin: '1em' }}>
-          Page {currentPage} of {totalPages}
+          Page {currentPage} of {totalPages || 1}
         </span>
-        <button
-          disabled={currentPage === totalPages}
-          onClick={() => goToPage(currentPage + 1)}
-        >
+        <button disabled={currentPage === totalPages} onClick={handleNextPage}>
           Next
         </button>
       </div>

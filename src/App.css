@@ -12,6 +12,7 @@ h1 {
 
 #root {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding: 4em;
 }
@@ -47,9 +48,4 @@ select {
 
 label {
   padding: 0.5em;
-}
-
-#root {
-  display: flex;
-  flex-direction: column;
 }
