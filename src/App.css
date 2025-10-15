@@ -12,6 +12,7 @@ h1 {
 
 #root {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding: 4em;
 }
@@ -47,13 +48,4 @@ select {
 
 label {
   padding: 0.5em;
-}
-
-/* .errorMessage {
-  border: 2px solid red;
-  color: darkred;
-} */
-
-.header {
-  background-color: red;
 }

@@ -1,9 +1,9 @@
 import './App.css';
-import TodoList from './features/TodoList/TodoList';
-import TodoForm from './features/TodoForm';
-import TodosViewForm from './features/TodosViewForm';
-import { useEffect, useCallback, useReducer } from 'react';
-import styles from './App.module.css';
+// import TodoList from './features/TodoList/TodoList';
+// import TodoForm from './features/TodoForm';
+// import TodosViewForm from './features/TodosViewForm';
+import { useEffect, useCallback, useReducer, useState } from 'react';
+// import styles from './App.module.css';
 import logo from './to-do-list.png';
 
 import {
@@ -11,6 +11,13 @@ import {
   actions as todoActions,
   initialState as initialTodosState,
 } from './reducers/todos.reducer';
+
+import TodosPage from './pages/TodosPage';
+import Header from './shared/Header/Header';
+import { Routes, Route, useLocation } from 'react-router';
+
+import About from './pages/About';
+import NotFound from './pages/NotFound';
 
 function App() {
   const [todoState, dispatch] = useReducer(todosReducer, initialTodosState);
@@ -30,6 +37,21 @@ function App() {
   // const url = 'https://api.airtable.com/v0/WRONG_ID/WRONG_TABLE';
   const token = `Bearer ${import.meta.env.VITE_PAT}`;
 
+  // title
+  const [title, setTitle] = useState('Todo List');
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setTitle('Todo List');
+    } else if (location.pathname === '/about') {
+      setTitle('About');
+    } else {
+      setTitle('Not Found');
+    }
+  }, [location]);
+
+  // **************
   const encodeUrl = useCallback(() => {
     let sortQuery = `sort[0][field]=${sortField}&sort[0][direction]=${sortDirection}`;
     let searchQuery = '';
@@ -200,67 +222,45 @@ function App() {
   ////////////
 
   return (
-    <div className={styles.appContainer}>
-      <header>
+    <>
+      {/* <header className={styles.header}>
         <img
           src={logo}
           alt="Todo Logo"
           style={{ height: '5em', marginRight: '1em' }}
         />
         <h1>Todo List</h1>
-      </header>
+      </header> */}
 
-      {isLoading && <p>loading...</p>}
-      {isSaving && <p>Saving...</p>}
+      <img src={logo} alt="Todo Logo" style={{ height: '5em', width: '5em' }} />
 
-      <TodoForm onAddTodo={addTodo} />
+      {/* <Header className={styles.header} title={title} /> */}
+      <Header title={title} />
 
-      <TodoList
-        onCompleteTodo={completeTodo}
-        todos={todoList}
-        onUpdateTodo={updateTodo}
-        isLoading={isLoading}
-        isSaving={isSaving}
-      />
-
-      <hr />
-      <TodosViewForm
-        sortField={sortField}
-        sortFieldChange={(field) =>
-          dispatch({ type: todoActions.setSortField, sortField: field })
-        }
-        sortDirection={sortDirection}
-        sortDirectionChange={(dir) =>
-          dispatch({ type: todoActions.setSortDirection, sortDirection: dir })
-        }
-        queryString={queryString}
-        queryStringChange={(query) =>
-          dispatch({ type: todoActions.setQueryString, queryString: query })
-        }
-      />
-
-      {/* display error */}
-      {errorMessage && (
-        <div className={styles.errorMessage}>
-          <hr />
-
-          <img
-            src="/src/icons/triangle-exclamation-solid-full.svg"
-            alt="Error icon"
-            style={{
-              width: '5em',
-              height: '5em',
-            }}
-          />
-
-          <p>{errorMessage}</p>
-          <button onClick={() => dispatch({ type: todoActions.clearError })}>
-            Dismiss Error Message
-          </button>
-        </div>
-      )}
-    </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <TodosPage
+              todoList={todoList}
+              isLoading={isLoading}
+              errorMessage={errorMessage}
+              isSaving={isSaving}
+              addTodo={addTodo}
+              completeTodo={completeTodo}
+              updateTodo={updateTodo}
+              sortField={sortField}
+              sortDirection={sortDirection}
+              queryString={queryString}
+              dispatch={dispatch}
+              todoActions={todoActions}
+            />
+          }
+        />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
-
 export default App;
